@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet">
+   <script src="/pomodoro.js"></script>
+
+  <style>
+    /* Minimal modal styles in case not included in styles.css */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 999;
+      left: 0; top: 0; right: 0; bottom: 0;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      max-width: 90%;
+      position: relative;
+    }
+    .modal .close {
+      position: absolute;
+      top: 8px; right: 12px;
+      font-size: 24px;
+      cursor: pointer;
+    }
+    /* Large flip-container size if not in styles.css */
+    .flip-container.large {
+      width: 80px;
+      height: 110px;
+      margin: 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container pomodoro-page">
+    <div class="back-button">
+      <button onclick="backToMainPage()" class="icon-btn">↩ Back to Clock</button>
+    </div>
+    
+    <h1>Pomodoro Timer</h1>
+    
+    <div class="current-time-small">
+      <span id="current-time">00:00:00</span>
+    </div>
+    
+    <div class="pomodoro-container">
+      <div class="timer-display">
+        <div class="pomodoro-time" id="pomodoro-time" aria-label="Pomodoro Timer">
+          <div class="flip-container large">
+            <div class="flipper" id="pomo-minute-tens">
+              <div class="front">2</div>
+              <div class="back">2</div>
+            </div>
+          </div>
+          <div class="flip-container large">
+            <div class="flipper" id="pomo-minute-ones">
+              <div class="front">5</div>
+              <div class="back">5</div>
+            </div>
+          </div>
+          <div class="separator">:</div>
+          <div class="flip-container large">
+            <div class="flipper" id="pomo-second-tens">
+              <div class="front">0</div>
+              <div class="back">0</div>
+            </div>
+          </div>
+          <div class="flip-container large">
+            <div class="flipper" id="pomo-second-ones">
+              <div class="front">0</div>
+              <div class="back">0</div>
+            </div>
+          </div>
+        </div>
+        <div id="timer-status" class="timer-status">Ready</div>
+        <div id="cycle-display" class="cycle-display">0/4 Cycles</div>
+      </div>
+      
+      <div class="pomodoro-controls">
+        <button onclick="startPomodoro()" class="primary-btn">Start Focus</button>
+        <button onclick="pauseResumePomodoro()" class="primary-btn" id="pause-btn">Pause</button>
+        <button onclick="resetPomodoro()" class="secondary-btn">Reset</button>
+        <button onclick="openCustomTimerModal()" class="secondary-btn">Custom Timer</button>
+      </div>
+    </div>
+
+    <div class="options-controls">
+      <button onclick="toggleFullscreen()" class="secondary-btn">Fullscreen</button>
+      <button onclick="toggleDarkMode()" class="secondary-btn">Dark Mode</button>
+      <!--<button onclick="toggleMusic()" class="secondary-btn">Play Music</button> -->
+    </div>
+
+    <!-- Alarm sound -->
+    <audio id="alarm-sound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
+    
+    <!-- YouTube Background Music -->
+    <div id="youtube-player-container" style="display: none;">
+      <div id="youtube-player"></div>
+    </div>
+    
+    <!-- Fallback audio in case YouTube fails -->
+    <audio id="background-music" loop>
+      <source src="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg" />
+    </audio>
+  </div>
+
+  <!-- Custom Timer Modal -->
+  <div id="custom-timer-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()" aria-label="Close">&times;</span>
+      <h2 id="modal-title">Set Custom Timer</h2>
+      <div class="timer-input">
+        <div>
+          <label for="focus-time">Focus Time (min):</label>
+          <input type="number" id="focus-time" min="1" max="120" value="25" />
+        </div>
+        <div>
+          <label for="break-time">Break Time (min):</label>
+          <input type="number" id="break-time" min="1" max="30" value="5" />
+        </div>
+        <div>
+          <label for="cycles">Number of Cycles:</label>
+          <input type="number" id="cycles" min="1" max="10" value="4" />
+        </div>
+      </div>
+      <button onclick="saveCustomTimer()" class="primary-btn">Save & Start</button>
+    </div>
+  </div>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="pomodoro.js"></script>
+</body>
+</html>

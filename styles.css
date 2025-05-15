@@ -1,0 +1,452 @@
+body {
+  margin: 0;
+  font-family: 'Coming Soon', sans-serif;
+  background-color: #111;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-direction: column;
+  transition: background 0.3s, color 0.3s;
+  overflow-x: hidden;
+}
+
+.container {
+  text-align: center;
+  position: relative;
+  padding: 2rem;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Clock Styles */
+.clock-container {
+  position: relative;
+  margin: 2rem 0 3rem;
+}
+
+.format-toggle {
+  position: absolute;
+  top: -30px;
+  right: 0;
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.clock {
+  display: flex;
+  font-size: 4.5em;
+  gap: 0.1em;
+  user-select: none;
+  margin-bottom: 1.5rem;
+  perspective: 600px;
+  justify-content: center;
+  align-items: center;
+}
+
+.am-pm {
+  font-size: 0.3em;
+  margin-left: 0.8em;
+  background-color: #333;
+  padding: 0.4em 0.6em;
+  border-radius: 0.5em;
+  align-self: center;
+}
+
+.separator {
+  padding: 0 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-container {
+  width: 1em;
+  height: 1.5em;
+  position: relative;
+  perspective: 1000px;
+}
+
+.flip-container.large {
+  width: 1.2em;
+  height: 1.8em;
+}
+
+.flipper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flipper.flip {
+  transform: rotateX(180deg);
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-color: #222;
+  border-radius: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.front {
+  z-index: 2;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #000;
+}
+
+.back {
+  transform: rotateX(180deg);
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #444;
+}
+
+.main-controls, .pomodoro-controls, .options-controls {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.8em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Pomodoro Styles */
+.pomodoro-page {
+  padding-top: 3rem;
+}
+
+.back-button {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+.current-time-small {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 5px 10px;
+  border-radius: 15px;
+}
+
+.pomodoro-container {
+  margin: 2rem 0;
+}
+
+.timer-display {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 2rem;
+  border-radius: 15px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.pomodoro-time {
+  display: flex;
+  justify-content: center;
+  gap: 0.1em;
+  font-size: 3.5em;
+  margin-bottom: 0.5rem;
+}
+
+.timer-status {
+  font-size: 1.3rem;
+  margin: 0.5rem 0;
+  color: #aaa;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.cycle-display {
+  font-size: 1rem;
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/* Button Styles */
+button {
+  padding: 0.7em 1.3em;
+  border: none;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 0.3em;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-family: 'Coming Soon', sans-serif;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #FF5722, #E91E63);
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, #FF7043, #EC407A);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.secondary-btn {
+  background: #444;
+}
+
+.secondary-btn:hover {
+  background: #666;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 0.9em;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.dark-mode .front, .dark-mode .back {
+  background-color: #ddd;
+  color: #333;
+}
+
+.dark-mode .timer-display {
+  background-color: rgba(200, 200, 200, 0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .secondary-btn {
+  background: #ccc;
+  color: #333;
+}
+
+.dark-mode .secondary-btn:hover {
+  background: #bbb;
+}
+
+.dark-mode .icon-btn {
+  background: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.dark-mode .icon-btn:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dark-mode .timer-status {
+  color: #777;
+}
+
+.dark-mode .am-pm {
+  background-color: #ccc;
+  color: #333;
+}
+
+.dark-mode .current-time-small {
+  background-color: rgba(200, 200, 200, 0.3);
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+}
+
+.modal-content {
+  background-color: #222;
+  margin: 15% auto;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  max-width: 500px;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.dark-mode .modal-content {
+  background-color: #f0f0f0;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: #fff;
+}
+
+.dark-mode .close:hover {
+  color: #333;
+}
+
+.timer-input {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.timer-input div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.timer-input input {
+  width: 70px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: white;
+  font-size: 1rem;
+}
+
+.dark-mode .timer-input input {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .clock {
+    font-size: 3em;
+  }
+  
+  .pomodoro-time {
+    font-size: 2.5em;
+  }
+  
+  .main-controls, .pomodoro-controls, .options-controls {
+    gap: 0.5em;
+  }
+  
+  button {
+    font-size: 0.9em;
+    padding: 0.6em 1.1em;
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .back-button, .current-time-small {
+    position: relative;
+    top: auto;
+    left: auto;
+    right: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .container {
+    padding: 1rem;
+  }
+}
+

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flip Clock</title>
+  <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Flip Clock</h1>
+
+    <div class="clock-container">
+      <div class="format-toggle">
+        <label class="switch">
+          <input type="checkbox" id="format-switch" />
+          <span class="slider round"></span>
+        </label>
+        <span id="format-label">12h</span>
+      </div>
+
+      <div class="clock" aria-label="Flip Clock">
+        <div class="flip-container" id="hour-tens">
+          <div class="flipper">
+            <div class="front">0</div>
+            <div class="back">0</div>
+          </div>
+        </div>
+        <div class="flip-container" id="hour-ones">
+          <div class="flipper">
+            <div class="front">0</div>
+            <div class="back">0</div>
+          </div>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="flip-container" id="minute-tens">
+          <div class="flipper">
+            <div class="front">0</div>
+            <div class="back">0</div>
+          </div>
+        </div>
+        <div class="flip-container" id="minute-ones">
+          <div class="flipper">
+            <div class="front">0</div>
+            <div class="back">0</div>
+          </div>
+        </div>
+
+        <div class="separator">:</div>
+
+        <div class="flip-container" id="second-tens">
+          <div class="flipper">
+            <div class="front">0</div>
+            <div class="back">0</div>
+          </div>
+        </div>
+        <div class="flip-container" id="second-ones">
+          <div class="flipper">
+            <div class="front">0</div>
+            <div class="back">0</div>
+          </div>
+        </div>
+
+        <div class="am-pm" id="am-pm"></div>
+      </div>
+
+      <div class="main-controls">
+        <button class="primary-btn" onclick="toggleFullscreen()">Fullscreen</button>
+        <button class="secondary-btn" onclick="toggleDarkMode()">Dark Mode</button>
+        <!--<button class="primary-btn" onclick="toggleMusic()">Music</button>-->
+        
+
+        <button class="secondary-btn" onclick="openPomodoroPage()">Pomodoro Timer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- YouTube player iframe, hidden -->
+  <div style="display:none;">
+    <div id="youtube-player"></div>
+  </div>
+
+  <!-- Fallback audio -->
+  <audio id="background-music" loop>
+    <source src="your-music-file.mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+  </audio>
+
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="script.js"></script>
+</body>
+</html>
