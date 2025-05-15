@@ -450,3 +450,16 @@ button:active {
   }
 }
 
+
+/* Target the timer input labels */
+.timer-input div label, 
+.timer-input div span {
+  background-color: #000; /* black background */
+  color: #fff;            /* white text */
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  min-width: 150px;
+  text-align: left;
+  font-weight: bold;
+}
