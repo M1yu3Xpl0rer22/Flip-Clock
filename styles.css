@@ -451,11 +451,13 @@ button:active {
 }
 
 
+
+
 /* Target the timer input labels */
 .timer-input div label, 
 .timer-input div span {
-  background-color: #000; /* black background */
-  color: #fff;            /* white text */
+  background-color: rgb(255, 255, 255)fff; /* black background */
+  color: #000000;            /* white text */
   padding: 4px 8px;
   border-radius: 4px;
   display: inline-block;
